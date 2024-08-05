@@ -54,10 +54,6 @@ Abaixo se encontram alguns materiais que podem ser úteis ao longo da disciplina
 * [Data Analysis with Python - Full Course for Beginners (Numpy, Pandas, Matplotlib, Seaborn)](https://www.youtube.com/watch?v=r-uOLxNrNk8)
 * [Pandas & Python for Data Analysis by Example – Full Course for Beginners](https://www.youtube.com/watch?v=gtjxAH8uaP0)
 
-**Mais videos (Não tem muito haver com meu curso em especifico, mas...):**
-* [MIT 18.06 Linear Algebra, Spring 2005](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8)
-* [3Blue1Brown](https://www.youtube.com/@3blue1brown)
-
 **Sites**:
 * https://www.reddit.com/r/learnpython/wiki/index/#wiki_new_to_programming.3F
 * https://www.geeksforgeeks.org/
