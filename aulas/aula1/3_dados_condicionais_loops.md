@@ -20,9 +20,12 @@ Existem diversas outras funções built-in no python, como
 ```type```,
 ```int```,
 ```float```,
-```str```.
+```chr```,
+```ord```,
+```str```,
+```len```.
 
-### Tipos de dados básico
+## Tipos de dados "primitivos"
 
 ### Constantes Numéricas e Textuais
 
@@ -347,15 +350,19 @@ for n in range(1,6):
 
 ## Exercícios
 
-1. Crie um programa que solicita ao usuário uma nota de 0 a 100 e converte essa nota para uma classificação em letras.
+1. Escreva um programa que gere os primeiros $N$ números da sequência de Fibonacci, onde $N$ é fornecido pelo usuário.
+
+2. Crie um programa que solicita ao usuário uma nota de 0 a 100 e converte essa nota para uma classificação em letras.
 As classificações são:
-    A: 80 a 100
-    B: 65 a 79
-    C: 40 a 64
-    D: 30 a 39
-    F: 0 a 29
+    * A: 80 a 100
+    * B: 65 a 79
+    * C: 40 a 64
+    * D: 30 a 39
+    * F: 0 a 29
 
-2. Crie um programa que recebe um número inteiro positivo $n$ e imprime todos os números pares de 1 até n.
-
-3. Altere o c;odigo do exercicio acima de forma que o mesmo também conte quantos números pares foram encontrados
-e imprima essa contagem no final.
+3. Escreva um programa que leia repetidamente um input do usuário.
+Se o usuário digitar:
+    * 'a', exibir "Hello". 
+    * 'b', exibir "world!".
+    * 'q', o programa deve sair.
+    * Caso contrário, dizer que entrada é invalida.
