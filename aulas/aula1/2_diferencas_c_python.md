@@ -25,7 +25,7 @@ Linguagens de programação podem ser divididas em relação a diversos aspectos
     Exemplo: Python, Java
 
 <p align="center">
-  <img src="programming-taxonomy.webp" width="400"/>
+  <img src="2_programming-taxonomy.webp" width="400"/>
 </p>
 
 ## Linguagem compilada vs interpretada
