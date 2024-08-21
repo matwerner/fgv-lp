@@ -344,7 +344,7 @@ que contém um arquivo de texto `wikipedia_good_articles_video_games.txt` no for
 Implemente e documente as seguintes funções:
 * Função `load_data(filepath)`
     * **Descrição**: Carrega os dados do arquivo especificado e retorna uma lista de dicionários.
-    * **Entrada**: Um caminho para o arquivo compactado (ZIP) contendo o arquivo de texto.
+    * **Entrada**: Um caminho para o arquivo de texto.
     * **Saída**: Lista de dicionários, onde cada dicionário representa uma página da Wikipedia.
 
 * Função `validate_data(data)`
