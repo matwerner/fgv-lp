@@ -181,15 +181,43 @@ resultado = soma_lista([1, 2, '3'])  # Erro: '3' não é um int
 Quando você executa MyPy nesse código, ele emitirá um erro indicando que o tipo `'3'` é incompatível com a anotação `List[int]`:
 
 ```shell
-meu_arquivo.py:4: error: Argument 1 to "soma_lista" has incompatible type "List[Union[int, str]]"; expected "List[int]"
+meu_arquivo.py:6: error: List item 2 has incompatible type "str"; expected "int"
 ```
+
+### Configuração avançada
+
+MyPy oferece diversas opções de configuração para personalizar a análise.
+Você pode criar um arquivo de configuração `mypy.ini` para definir regras e opções específicas:
+
+```ini
+[mypy]
+disallow_untyped_calls = True
+disallow_untyped_defs = True
+ignore_missing_imports = True
+```
+
+Essas opções permitem, por exemplo, desabilitar funções não tipadas e ignorar importações ausentes.
+
+Para mais detalhes sobre todas as opçõses de verificação disponiveis, verificar a [documentação do MyPy](http://mypy-lang.org/).
 
 ## 5. Exercícios Práticos
 
-* Escreva uma função que receba uma lista de números inteiros e retorne a soma dos valores, utilizando Type Hints.
-* Crie uma função que receba um dicionário com chaves do tipo str e valores do tipo int, e retorne uma lista contendo apenas os valores.
-* Implemente uma função que receba um valor que pode ser int ou str, e retorne uma string representando esse valor.
+(Continuando os exercícios da aula passada...)
 
-## 6. Recursos Adicionais
-* [PEP 484 - Type Hints](https://peps.python.org/pep-0484/)
-* [Documentação do MyPy](http://mypy-lang.org/)
+Implemente e documente as seguintes funções:
+
+* Função clean_text(text)
+    - **Descrição**: Remove todos os caracteres não alfanuméricos do texto fornecido, retornando uma versão do mesmo contendo apenas letras e números.
+    - **Entrada**: Uma string representando o texto a ser limpo.
+    - **Saída**: Uma string contendo apenas letras e números.
+
+* Função top_n_words(texts, n)
+    - **Descrição**: Retorna as n palavras mais frequentes em um conjunto de textos fornecido.
+    - **Entrada**: Uma lista de strings, onde cada string representa um texto, e um número inteiro n que define a quantidade de palavras mais frequentes a serem retornadas.
+    - **Saída**: Uma lista de tuplas, onde cada tupla contém uma palavra e sua frequência, ordenadas pela frequência em ordem decrescente.
+
+* Função generate_vocabulary(texts, n)
+
+    * **Descrição**: Gera um vocabulário contendo as n palavras mais frequentes a partir de um conjunto de textos fornecido.
+    * **Entrada**: Uma lista de strings, onde cada string representa um texto, e um número inteiro n que define o tamanho do vocabulário a ser gerado.
+    * **Saída**: Um conjunto de palavras que compõem o vocabulário, ordenadas pela frequência em ordem decrescente, contendo até n palavras.
