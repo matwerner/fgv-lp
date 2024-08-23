@@ -161,3 +161,33 @@ Considera a frequência das palavras, sendo mais sensível a mudanças nas conta
 
 Adaptar os códigos de exemplo acima para podermos lidar com as páginas da wikipedia vistos na ultima aula.
 Para comparar as paginas, utilizar a distancia euclidiana.
+
+## Exercício
+
+Adapte os códigos de exemplo para lidar com as páginas da Wikipedia discutidas na última aula. Para comparar a similaridade entre as páginas, utilize a distância euclidiana. Siga os passos abaixo:
+
+### 0. **Modularização do Código para Melhor Legibilidade**
+   - Separe o código em funções distintas para melhorar a organização e legibilidade.
+   - Crie funções dedicadas para leitura de arquivos e criação de vocabulário.
+   - Documentar e adicionar Type Hint para todas as funções.
+   - Coloque todas as funções no início do código e concentre a lógica principal de execução dentro de uma função `main`.
+
+### 1. **Adaptar o Código para Lidar com Páginas da Wikipedia**
+   - Modifique o código de exemplo para carregar textos das páginas da Wikipedia.
+   - Certifique-se de que o vocabulário inclui todas as palavras únicas presentes nos documentos extraídos.
+
+### 2. **Testar a Execução do Código Adaptado**
+   - Execute o código adaptado.
+   - Observe e documente o comportamento do programa. 
+   - Identifique possíveis problemas de desempenho, como lentidão na execução. Reflita sobre por que o código pode estar lento.
+
+### 3. **Otimização de Desempenho**
+   - Melhore a eficiência das funções críticas, por exemplo, a função de contagem de palavras no modelo Bag-of-Words.
+   - Considere reduzir o tamanho do vocabulário para minimizar o número de cálculos de distância, mantendo apenas as palavras mais frequentes ou relevantes.
+   - Adicione uma função de normalização de texto que converta tudo para caixa baixa e remova caracteres não alfanuméricos, para garantir consistência na tokenização.
+
+### 4. **Implementação de Busca por Páginas Similares**
+   - Escolha uma página da Wikipedia e implemente um algoritmo para encontrar as páginas mais similares a ela com base no conteúdo textual.
+   - Carregue também os títulos das páginas, além do conteúdo textual.
+   - Desenvolva uma função que permita ao usuário selecionar uma página específica usando os títulos das páginas.
+   - Compare o conteúdo textual das páginas e exiba os títulos das páginas que são mais similares ao título selecionado pelo usuário, utilizando a distância euclidiana para medir similaridade.
