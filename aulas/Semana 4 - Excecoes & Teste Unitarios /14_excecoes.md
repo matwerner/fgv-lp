@@ -122,6 +122,17 @@ else:
 O bloco `finally` é usado para definir um código que deve ser executado independentemente de uma exceção ter sido levantada ou não.
 Ele é frequentemente usado para liberar recursos, como arquivos abertos ou conexões de banco de dados.
 
+```python
+try:
+    arquivo = open("arquivo.txt", "r")
+    conteudo = arquivo.read()
+except IOError as e:
+    print(f"Erro ao abrir o arquivo: {e}")
+finally:
+    arquivo.close()
+    print("Arquivo fechado.")
+```
+
 ##  Boas Práticas no Tratamento de Exceções
 
 * **Seja Específico**:
