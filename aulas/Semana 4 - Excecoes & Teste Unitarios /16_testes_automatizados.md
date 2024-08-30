@@ -1,4 +1,4 @@
-# Aula: Testes Automatizados em Python
+# Testes Automatizados em Python
 
 Testes automatizados são scripts que verificam se o código está funcionando conforme o esperado, automaticamente.
 Ao invés de verificar manualmente se cada parte do código está correta, o desenvolvedor escreve testes que fazem essas verificações.
@@ -96,6 +96,8 @@ No Python, existem várias bibliotecas que facilitam a escrita e execução de t
 - **Exemplo de `doctest`:**
 
     ```python
+    import doctest
+
     def soma(a, b):
         """
         Retorna a soma de a e b.
@@ -107,26 +109,13 @@ No Python, existem várias bibliotecas que facilitam a escrita e execução de t
         0
         """
         return a + b
+    
+    if __name__ == "__main__":
+        doctest.testmod()
     ```
 
     Ao executar `python -m doctest -v nome_do_arquivo.py`, o `doctest` validará se os exemplos fornecidos na docstring produzem a saída esperada.
 
-#### Exercícios
-
-Para cada exercício abaixo, implemente a função detalhada e dicione um doctest para verificar o seu correto funcionamento.
-
-1. Escreva uma função chamada `preprocessar_texto(texto)` que receba um texto como entrada e retorne uma versão pré-processada do texto.
-O pré-processamento deve incluir:
-    * Conversão de todas as letras para minúsculas;
-    * Aceitação apenas de caracteres alfanuméricos ou espaços;
-    * Troca de todos os digitos por `0`;
-    * Remoção de espaços extras no início e no fim do texto.
-
-2. Escreva uma função chamada `criar_vocabulario(textos, n)` que receba uma lista de textos já pré-processados e um número inteiro $n$, e retorne um vocabulário contendo até $n$ palavras únicas ordenadas por frequência de ocorrência.
-
-# (Em construção)
-
-<!-- 
 ### 3.2 `unittest`
 
 - **O que é `unittest`?**
@@ -179,4 +168,62 @@ O pré-processamento deve incluir:
 - **Use `unittest` quando:**
   - Precisa de uma estrutura de teste mais robusta e detalhada.
   - Está escrevendo testes para um sistema maior, com múltiplas interações e cenários.
-  - Deseja separar claramente o código de produção dos testes. -->
+  - Deseja separar claramente o código de produção dos testes.
+
+### 3.4 Estratégias de Implementação de Testes Unitários
+
+Para escrever testes unitários eficazes, considere as seguintes estratégias:
+
+1. **Isolamento:** Cada teste deve ser independente dos outros. Não deve haver dependências entre os testes, garantindo que a falha de um teste não afete a execução de outro.
+
+2. **Granularidade:** Testes unitários devem ser granulares, testando pequenas unidades de código (por exemplo, funções individuais). Isso facilita a identificação do local exato do problema quando um teste falha.
+
+3. **Cobertura Completa:** Esforce-se para cobrir o máximo de código possível com testes. Isso inclui tanto os caminhos normais quanto os caminhos alternativos ou de exceção.
+
+4. **Facilidade de Manutenção:** Os testes devem ser fáceis de entender e manter. Use nomes descritivos para os métodos de teste e inclua comentários quando necessário para esclarecer o propósito do teste.
+
+### 3.5 Casos Normais e Casos de Borda
+
+- **Casos Normais:** São os cenários mais comuns e esperados para a execução de uma função ou método. Testar esses casos garante que o comportamento básico do código esteja correto.
+  
+  - Exemplo: Testar uma função de ordenação, como `bubble_sort()`, em uma lista desordenada de inteiros, como `[3, 1, 4, 2]`, para verificar se a lista é ordenada corretamente.
+
+- **Casos de Borda (Edge Cases):** São cenários que estão nos limites do que se espera que a função ou método possa processar. Testar esses casos ajuda a garantir que o código lide adequadamente com valores extremos ou situações inesperadas.
+
+  - **Exemplo com Ordenação:** Testar a função `bubble_sort()` com uma lista vazia (`[]`), uma lista com um único elemento (`[1]`), ou uma lista já ordenada (`[1, 2, 3, 4]`). Esses casos ajudam a garantir que a função possa lidar com inputs extremos sem erros e mantenha a estabilidade.
+  
+  - **Exemplo com União de Listas:** Testar uma função de união de duas listas ordenadas, como `unir_listas(lista1, lista2)`, com uma das listas vazia e a outra preenchida, como `unir_listas([], [1, 2, 3])`. Isso verifica se a função pode lidar com listas de tamanhos diferentes e se preserva a ordem correta.
+
+### 3.6 Cobertura de Teste (Test Coverage)
+
+- **O que é Cobertura de Teste?**
+  - Cobertura de teste refere-se à medida de quanto do código é testado pelos testes automatizados. Ela indica a porcentagem de linhas de código, funções, ou caminhos executáveis que são cobertos durante a execução dos testes.
+
+- **Por que é importante?**
+  - A cobertura de teste é uma métrica útil para identificar partes do código que não são testadas. Quanto maior a cobertura, maior a confiança de que o código foi testado adequadamente.
+  - No entanto, alta cobertura não garante a ausência de bugs. É possível ter 100% de cobertura e ainda assim haver bugs se os testes não forem escritos para cobrir todos os cenários relevantes.
+  
+- **Como medir a cobertura de teste?**
+  - Existem ferramentas específicas para medir a cobertura de teste, como `coverage.py` para Python. Essas ferramentas analisam o código durante a execução dos testes e geram relatórios mostrando quais partes do código foram executadas.
+
+    - Exemplo de uso de `coverage.py`:
+
+    ```bash
+    coverage run -m unittest nome_do_arquivo.py
+    coverage report
+    coverage html  # Gera um relatório HTML detalhado
+    ```
+
+#### Exercícios
+
+Para cada exercício abaixo, implemente a função detalhada e adicione um `doctest` para verificar o seu correto funcionamento.
+Em seguida, faça o mesmo utilizando `unittest`.
+
+1. Escreva uma função chamada `preprocessar_texto(texto)` que receba um texto como entrada e retorne uma versão pré-processada do texto.
+O pré-processamento deve incluir:
+    * Conversão de todas as letras para minúsculas;
+    * Aceitação apenas de caracteres alfanuméricos ou espaços;
+    * Troca de todos os digitos por `0`;
+    * Remoção de espaços extras no início e no fim do texto.
+
+2. Escreva uma função chamada `criar_vocabulario(textos, n)` que receba uma lista de textos já pré-processados e um número inteiro $n$, e retorne um vocabulário contendo até $n$ palavras únicas ordenadas por frequência de ocorrência.

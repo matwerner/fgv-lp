@@ -1,4 +1,4 @@
-# Aula: Níveis de Depuração de Código
+# Níveis de Depuração de Código
 
 Depuração é o processo de encontrar e corrigir erros em um programa de computador.
 Independentemente da experiência do programador, erros são comuns e inevitáveis.
