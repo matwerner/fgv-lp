@@ -223,7 +223,14 @@ Em seguida, faça o mesmo utilizando `unittest`.
 O pré-processamento deve incluir:
     * Conversão de todas as letras para minúsculas;
     * Aceitação apenas de caracteres alfanuméricos ou espaços;
-    * Troca de todos os digitos por `0`;
     * Remoção de espaços extras no início e no fim do texto.
 
 2. Escreva uma função chamada `criar_vocabulario(textos, n)` que receba uma lista de textos já pré-processados e um número inteiro $n$, e retorne um vocabulário contendo até $n$ palavras únicas ordenadas por frequência de ocorrência.
+
+3. Escreva uma função chamada `distancia_euclidiana(vetor1, vetor2)` que receba dois vetores no espaço $n$-dimensional, representados por tuplas de números, e retorne a distância euclidiana entre eles.
+
+4. Escreva uma função chamada `busca_binaria(lista, alvo)` que implemente o algoritmo de busca binária.
+A função deve receber uma lista ordenada de elementos e um valor a ser procurado.
+Se o valor estiver na lista, a função deve retornar o índice onde o valor se encontra. Caso contrário, deve retornar $-1$.
+
+5. Escreva uma função chamada `uniao_listas_ordenadas(lista1, lista2)` que receba duas listas ordenadas e retorne uma nova lista contendo todos os elementos de ambas as listas, também em ordem.
