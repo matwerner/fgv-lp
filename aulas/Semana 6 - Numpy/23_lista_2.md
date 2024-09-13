@@ -13,6 +13,7 @@ pares = [26, 42, 68, 88, 90]
 ## 2. Normalização de Dados
 
 Normalize um array 1D de notas de exames (números inteiros aleatórios entre 0 e 100) para uma escala de 0 a 1 usando a fórmula:
+
 $$ \text{normalized} = \frac{x - \text{min}(x)}{\text{max}(x) - \text{min}(x)} $$
 
 ```python
