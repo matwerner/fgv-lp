@@ -10,8 +10,8 @@
 * Considere um cenário em que você tem uma classe base chamada `Pagamento`, que define um método `processar()`. Várias subclasses, como `CartaoCredito` e `TransferenciaBancaria`, implementam esse método de maneiras diferentes. Assim, você pode chamar `processar()` em qualquer objeto do tipo `Pagamento`, e o comportamento será adaptado de acordo com a forma específica de pagamento.
     ```python
     class Pagamento:
-    def processar(self):
-        pass
+        def processar(self):
+            pass
 
     class CartaoCredito(Pagamento):
         def processar(self):
@@ -39,7 +39,7 @@
 * Existem duas formas principais de polimorfismo em Programação Orientada a Objetos (POO):
     * **Polimorfismo por Sobrescrita de Métodos**:
     Ocorre quando uma subclasse fornece uma nova implementação de um método já definido na classe base, permitindo comportamentos diferentes para o mesmo método em subclasses.
-    * **Polimorfismo por Contratos (Interfaces)**:
+    * **Polimorfismo por Subtipagem (Interfaces)**:
     É alcançado por meio de interfaces ou classes abstratas que definem métodos que devem ser implementados pelas subclasses, garantindo que diferentes classes sigam o mesmo contrato e possam ser usadas de forma intercambiável.
 
 
