@@ -1,161 +1,224 @@
-# (EM CONSTRUÇÃO) Orientação a Objetos: Polimorfismo
+# Orientação a Objetos: Polimorfismo
 
-## 1. Conceito e Definição
+## 1. O que é Polimorfismo?
 
-- **Definição de Polimorfismo:**
-  - Polimorfismo é um conceito central em programação orientada a objetos que permite que métodos em diferentes classes tenham o mesmo nome, mas diferentes implementações.
-  - Ele provê uma interface comum para objetos de classes diferentes, permitindo que eles sejam tratados de forma intercambiável.
+* Polimorfismo é um dos conceitos fundamentais da Programação Orientada a Objetos (POO). Ele permite que diferentes classes sejam tratadas como se fossem instâncias de uma classe comum, mesmo que essas classes não compartilhem uma hierarquia direta.
+* Essa característica promove a flexibilidade e a extensibilidade do código, pois objetos de classes diferentes podem ser manipulados de maneira intercambiável.
 
-- **Importância do Polimorfismo:**
-  - O polimorfismo é fundamental para a abstração e a encapsulação, pois permite que você escreva código que pode trabalhar com objetos de diferentes tipos de maneira uniforme.
-  - Quando você chama um método em um objeto, não precisa saber qual implementação específica será executada; isso é decidido em tempo de execução, tornando o código mais flexível e extensível.
+### Exemplo
 
+* Considere um cenário em que você tem uma classe base chamada `Pagamento`, que define um método `processar()`. Várias subclasses, como `CartaoCredito` e `TransferenciaBancaria`, implementam esse método de maneiras diferentes. Assim, você pode chamar `processar()` em qualquer objeto do tipo `Pagamento`, e o comportamento será adaptado de acordo com a forma específica de pagamento.
+    ```python
+    class Pagamento:
+    def processar(self):
+        pass
 
-## 2. Exemplo Prático
+    class CartaoCredito(Pagamento):
+        def processar(self):
+            return "Processando pagamento com cartão de crédito."
 
-### 2.1. Hierarquia de Classes
+    class TransferenciaBancaria(Pagamento):
+        def processar(self):
+            return "Processando transferência bancária."
 
-- **Cenário: Personagens de RPG:** Vamos criar uma hierarquia de classes que inclui diferentes tipos de personagens que implementam um método comum chamado `ataque()`.
+    def realizar_pagamento(pagamento: Pagamento):
+        print(pagamento.processar())
 
-  ```python
-    class Personagem:
-        def ataque(self) -> str:
-            raise NotImplementedError("Este método deve ser implementado por subclasses.")
+    # Exemplo de uso
+    pagamento_cartao = CartaoCredito()
+    pagamento_transferencia = TransferenciaBancaria()
 
-    class Guerreiro(Personagem):
-        def ataque(self) -> str:
-            return "Guerreiro ataca com espada!"
+    realizar_pagamento(pagamento_cartao)       # Saída: Processando pagamento com cartão de crédito.
+    realizar_pagamento(pagamento_transferencia) # Saída: Processando transferência bancária.
+    ```
 
-    class Mago(Personagem):
-        def ataque(self) -> str:
-            return "Mago lança um feitiço!"
+* Neste exemplo, mesmo que `CartaoCredito` e `TransferenciaBancaria` sejam classes diferentes, ambos podem ser tratados como um `Pagamento`. Ao chamar o método `processar()`, cada classe fornece sua própria implementação, demonstrando como o polimorfismo permite que métodos operem de maneira consistente em diferentes tipos de objetos.
 
-    class Arqueiro(Personagem):
-        def ataque(self) -> str:
-            return "Arqueiro dispara uma flecha!"
-  ```
+## 2. Tipos de Polimorfismo
 
-  - **Explicação:** A classe `Personagem` define um método `ataque()` que levanta `NotImplementedError`, indicando que as subclasses devem fornecer sua própria implementação. Essa abordagem é simples e acessível para alunos iniciantes.
-
-### 2.2. Utilização do Polimorfismo
-
-- **Implementando o Polimorfismo:**
-  - Vamos criar uma função que aceita qualquer objeto da classe `Personagem` e chama o método `ataque()`.
-  - A função deve demonstrar como diferentes instâncias de personagens respondem ao mesmo método, evidenciando o conceito de polimorfismo.
-
-  ```python
-    def realizar_ataque(personagem: Personagem) -> None:
-        """Chama o método ataque() de um personagem."""
-        print(personagem.ataque())
-
-    # Testando a função com diferentes tipos de personagens
-    guerreiro = Guerreiro()
-    mago = Mago()
-    arqueiro = Arqueiro()
-
-    realizar_ataque(guerreiro)  # "Guerreiro ataca com espada!"
-    realizar_ataque(mago)       # "Mago lança um feitiço!"
-    realizar_ataque(arqueiro)   # "Arqueiro dispara uma flecha!"
-  ```
-
-  - **Explicação:** A função `realizar_ataque` aceita um parâmetro do tipo `Personagem`. Isso significa que você pode passar qualquer instância de `Personagem` ou de suas subclasses, e o método apropriado será chamado, demonstrando o polimorfismo.
+* Existem duas formas principais de polimorfismo em Programação Orientada a Objetos (POO):
+    * **Polimorfismo por Sobrescrita de Métodos**:
+    Ocorre quando uma subclasse fornece uma nova implementação de um método já definido na classe base, permitindo comportamentos diferentes para o mesmo método em subclasses.
+    * **Polimorfismo por Contratos (Interfaces)**:
+    É alcançado por meio de interfaces ou classes abstratas que definem métodos que devem ser implementados pelas subclasses, garantindo que diferentes classes sigam o mesmo contrato e possam ser usadas de forma intercambiável.
 
 
+### 2.1 Polimorfismo por Sobrescrita de Métodos (Override):
 
-## 3. Discussão sobre Abstração e Métodos Abstratos
+* O polimorfismo por sobrescrita de métodos ocorre quando uma `subclasse` redefine um método herdado da sua `superclasse`, mantendo o mesmo nome e assinatura, mas alterando o comportamento.
+* Esse tipo de polimorfismo está diretamente ligado ao conceito de `herança`, onde uma `subclasse` herda atributos e métodos de uma `superclasse`, mas pode especializar o comportamento de certos métodos.
 
-- **Conceito de Abstração:** A abstração é um dos pilares da Programação Orientada a Objetos (POO) e refere-se à ideia de ocultar os detalhes de implementação e mostrar apenas a funcionalidade essencial de um objeto. Isso permite que os desenvolvedores interajam com objetos em um nível mais alto, sem se preocupar com a complexidade interna.
-
-- **Métodos Abstratos:** Um método abstrato é um método que é declarado, mas não implementado na classe base. As subclasses devem fornecer suas próprias implementações para esses métodos. Isso estabelece um contrato que garante que todas as subclasses implementem comportamentos específicos, promovendo a consistência no design do sistema.
-
-- **Comparação: `NotImplementedError` vs. `@abstractmethod`:**
-  - **`raise NotImplementedError`:**
-  Essa abordagem é simples e direta, ideal para iniciantes. Ao definir um método na classe base e levantar NotImplementedError, você indica que a implementação deve ser feita nas subclasses.
+#### Exemplo
 
     ```python
     class Animal:
-        def fazer_som(self):
-            raise NotImplementedError("Este método deve ser implementado por subclasses.")
+    def fazer_som(self):
+        return "Algum som"
 
     class Cachorro(Animal):
         def fazer_som(self):
-            return "Au Au!"
+            return "Latido"
 
     class Gato(Animal):
         def fazer_som(self):
-            return "Miau!"
+            return "Miau"
+
+    def emitir_som(animal: Animal):
+        print(animal.fazer_som())
+
+    # Ambos os animais respondem ao mesmo método, mas com comportamentos diferentes
+    emitir_som(Cachorro())  # Saída: Latido
+    emitir_som(Gato())      # Saída: Miau
     ```
 
-    - **Explicação:** Nesta abordagem, a classe base `Animal` define o método `fazer_som()` e levanta um `NotImplementedError`. As subclasses Cachorro e Gato devem implementar este método. Se alguém tentar instanciar `Animal` ou chamar `fazer_som()` sem uma implementação, receberá um erro.
+* Explicação:
+    * `Animal` é a superclasse que define um método `fazer_som()`, que retorna um som genérico.
+    * As classes `Cachorro` e `Gato` são subclasses de `Animal` e sobrescrevem o método `fazer_som()` para fornecer sons específicos.
+    * A função `emitir_som()` aceita um objeto do tipo `Animal`, mas o polimorfismo garante que o método correto (`fazer_som()`) será chamado com base no tipo real do objeto passado, seja um `Cachorro` ou um `Gato`.
+* *Aqui, o polimorfismo por sobrescrita permite que a função `emitir_som()` trate objetos de diferentes classes (`Cachorro` e `Gato`) de forma intercambiável, chamando o método adequado com base no tipo específico do objeto, mesmo que ambos sejam referenciados como `Animal`.
 
-  - **`@abstractmethod`:** 
-  O uso de `@abstractmethod` dentro de uma classe abstrata (definida com `ABC`) fornece uma maneira mais formal de definir métodos que devem ser implementados pelas subclasses. O Python não permitirá que você instancie a classe base, garantindo que todas as subclasses implementem os métodos necessários. Essa abordagem é recomendada para projetos maiores ou mais complexos.
+### 2.2 Polimorfismo por Subtipagem (Interfaces)
 
-    ```python
-    from abc import ABC, abstractmethod
+* O polimorfismo por subtipagem, também conhecido como polimorfismo por interfaces, é uma abordagem que permite que diferentes classes implementem os mesmos métodos definidos em uma interface ou classe abstrata.
+* Esse tipo de polimorfismo assegura que todas as classes que implementam a interface cumpram um "contrato" específico, ou seja, devem fornecer suas próprias versões dos métodos definidos.
 
-    class Animal(ABC):
-        @abstractmethod
-        def fazer_som(self):
-            pass
+#### Exemplo
 
-    class Cachorro(Animal):
-        def fazer_som(self):
-            return "Au Au!"
+```python
+class Forma:
+    def area(self):
+        raise NotImplementedError("Este método deve ser implementado pela subclasse")
 
-    class Gato(Animal):
-        def fazer_som(self):
-            return "Miau!"
-    ```
+class Retangulo(Forma):
+    def __init__(self, largura, altura):
+        self.largura = largura
+        self.altura = altura
 
-    - **Explicação:** Aqui, `Animal` é definida como uma classe `abstrata` que utiliza o decorador `@abstractmethod` para declarar `fazer_som()`. Essa abordagem não permite a instância da classe base `Animal`, garantindo que todas as subclasses implementem o método antes de serem utilizadas.
+    def area(self):
+        return self.largura * self.altura
 
-- **Quando Usar Cada Abordagem:**
-    - **`NotImplementedError`:** Melhor para projetos simples ou para alunos iniciantes, facilitando a compreensão dos conceitos de herança e polimorfismo.
-    - **`@abstractmethod`:** Recomendado para projetos mais complexos, onde a estrutura e a segurança são importantes. Essa abordagem ajuda a prevenir erros de implementação.
+class Circulo(Forma):
+    def __init__(self, raio):
+        self.raio = raio
 
+    def area(self):
+        return 3.14 * (self.raio ** 2)
 
-## 4. Polimorfismo com Herança
+def calcular_area(forma: Forma):
+    print(f"A área da forma é: {forma.area()}")
 
-- **Sobrescrita de Métodos:** Quando uma classe filha fornece uma implementação específica de um método que já foi definido na classe pai, dizemos que ela está sobrescrevendo o método.
+# Exemplo de uso
+retangulo = Retangulo(5, 3)
+circulo = Circulo(2)
 
-- **Exemplo de Sobrescrita:** Considere a classe `Animal` com o método `fazer_som()`, onde cada tipo de animal implementa seu próprio som.
+calcular_area(retangulo)  # Saída: A área da forma é: 15
+calcular_area(circulo)     # Saída: A área da forma é: 12.56
+```
 
-    ```python
-    class Animal:
-        def fazer_som(self) -> str:
-            raise NotImplementedError("Este método deve ser implementado por subclasses.")
+* Explicação:
+    * `Forma` é uma classe abstrata que define o método `area()`, que deve ser implementado por qualquer classe que herde dela.
+    * `Retangulo` e `Circulo` são subclasses que implementam o método `area()` de maneiras específicas, calculando a área conforme sua forma geométrica.
+    * A função `calcular_area()` aceita um objeto do tipo Forma e chama o `método area()`, que é definido de forma consistente em todas as subclasses.
+* Neste exemplo, o polimorfismo por contratos permite que a função `calcular_area()` trate diferentes formas (retângulos e círculos) de forma intercambiável, garantindo que todos os objetos sigam o contrato estipulado pela classe abstrata `Forma`. Isso proporciona flexibilidade no código, facilitando a adição de novas formas sem a necessidade de alterar a função de cálculo.
 
-    class Cachorro(Animal):
-        def fazer_som(self) -> str:
-            return "Au Au!"
+## 3. Classes Abstratas e Protocols
 
-    class Gato(Animal):
-        def fazer_som(self) -> str:
-            return "Miau!"
-    ```
+* Como já comentamos, no polimorfismo por subtipagem, as classes fornecem um contrato de métodos e atributos que devem ser implementados ou seguidos por outras classes, garantindo que elas possam ser usadas de forma intercambiável, mesmo que não compartilhem uma hierarquia de herança direta.
+* Existem duas formas principais de implementar esse tipo de polimorfismo em Python: `Classes Abstratas` e `Protocols`.
 
-## 5. Exemplos do Mundo Real
+### 3.1 Classes Abstratas
 
-- **Discussão sobre Aplicações:** O polimorfismo pode ser encontrado em muitos contextos do dia a dia, como métodos de pagamento que implementam um método comum `processar_pagamento()` e dispositivos de impressão com um método `imprimir()`.
+* As Classes Abstratas definem métodos que devem ser implementados pelas subclasses, fornecendo um contrato explícito. Elas garantem que toda classe que herda de uma classe abstrata tenha uma implementação para os métodos marcados como abstratos. Em Python, isso é feito através do módulo abc e do decorador @abstractmethod.
 
-    ```python
-    class Dispositivo:
-        def imprimir(self) -> str:
-            raise NotImplementedError("Este método deve ser implementado por subclasses.")
+    * **Quando usar**: Quando você deseja que as subclasses implementem obrigatoriamente certos métodos, assegurando que sigam um comportamento definido.
 
-    class Impressora(Dispositivo):
-        def imprimir(self) -> str:
-            return "Imprimindo em papel."
+#### Exemplo
 
-    class Scanner(Dispositivo):
-        def imprimir(self) -> str:
-            return "Escaneando documento."
-    ```
+```python
+from abc import ABC, abstractmethod
 
+class Forma(ABC):
+    @abstractmethod
+    def area(self):
+        pass
 
+class Retangulo(Forma):
+    def __init__(self, largura, altura):
+        self.largura = largura
+        self.altura = altura
+
+    def area(self):
+        return self.largura * self.altura
+
+# Verificando se a classe segue o contrato da classe abstrata
+retangulo = Retangulo(3, 4)
+print(isinstance(retangulo, Forma))  # Saída: True
+```
+
+* Aqui, a classe `Forma` define o método `area()`, e qualquer subclasse (como `Retangulo`) é obrigada a implementar esse método. Se não o fizer, será impossível instanciar a subclasse.
+
+### 3.2. Protocols
+
+* Os **Protocols**, introduzidos em Python com o módulo **typing**, permitem que você defina um contrato de métodos e atributos sem forçar as classes a herdar explicitamente de uma classe base. Um protocolo apenas verifica se um objeto segue esse contrato, ou seja, se possui os métodos ou atributos esperados, mesmo que não tenha uma relação de herança direta.
+
+    * **Quando usar**: Quando você quer verificar se um objeto segue um conjunto de comportamentos (contrato) sem exigir herança formal. Protocols oferecem maior flexibilidade, pois a classe que os implementa não precisa explicitamente herdar de uma classe base.
+
+#### Exemplo
+
+```python
+from typing import Protocol, runtime_checkable
+
+@runtime_checkable
+class Desenhavel(Protocol):
+    def desenhar(self) -> None:
+        ...
+
+class Circulo:
+    def desenhar(self) -> None:
+        print("Desenhando um círculo")
+
+def desenhar_forma(forma: Desenhavel):
+    forma.desenhar()
+
+circulo = Circulo()
+desenhar_forma(circulo)  # Saída: Desenhando um círculo
+
+# Verificando se o objeto segue o contrato do protocolo em tempo de execução
+print(isinstance(circulo, Desenhavel))  # Saída: True
+```
+
+* Neste caso, `Circulo` não herda de `Desenhavel`, mas segue o contrato ao implementar o método `desenhar()`. Protocols garantem que o comportamento esperado seja seguido sem exigir uma relação formal de herança.
+
+### 3.3. Diferenças entre Classes Abstratas e Protocols
+
+* **Classes Abstratas**: Exigem herança direta e forçam a implementação dos métodos abstratos nas subclasses. O uso de `isinstance` verifica se o objeto é uma instância da classe abstrata.
+* **Protocols**: Não exigem herança direta e verificam se o objeto implementa os métodos necessários, sem impor uma relação de hierarquia. Quando decorados com `@runtime_checkable`, permitem o uso de `isinstance` para verificar a conformidade do contrato em tempo de execução.
 
 ## 6. Exercício Prático
 
-- **Tarefa:** Implemente uma hierarquia de classes para veículos. Cada tipo de veículo (carro, moto, caminhão) deve implementar um método comum chamado `dirigir()` que retorna uma string descritiva. Em seguida, eles devem demonstrar o uso do polimorfismo chamando `dirigir()` em diferentes instâncias de veículos.
+### 4.1. 4.1 Polimorfismo por Sobrescrita de Métodos
 
+Crie uma classe `Personagem` com um método `atacar()`. Depois, crie as subclasses `Guerreiro` e `Mago`, onde cada uma deve sobrescrever o método `atacar()` para implementar seu próprio estilo de ataque.
+
+1. A classe `Personagem` deve ter o método `atacar()`.
+2. A classe `Guerreiro` deve sobrescrever `atacar()` para exibir um ataque físico.
+3. A classe `Mago` deve sobrescrever `atacar()` para exibir um ataque mágico.
+4. Crie uma função que receba um personagem e chame seu método `atacar()`.
+
+### 4.2. Polimorfismo por Subtipagem com Classes Abstratas
+
+Crie uma classe abstrata Usuario com um método `acessar_conteudo()`. Em seguida, crie as subclasses `UsuarioGratuito` e `UsuarioPremium`, onde cada uma implementa o método `acessar_conteudo()` de maneira diferente, conforme as regras do seu plano.
+
+1. A classe `Usuario` deve ter o método abstrato `acessar_conteudo()`.
+2. A classe `UsuarioGratuito` deve implementar `acessar_conteudo()` com restrições de acesso.
+3. A classe `UsuarioPremium` deve implementar `acessar_conteudo()` com acesso completo ao conteúdo.
+4. Crie uma função que receba um usuário e permita acessar o conteúdo de acordo com seu tipo.
+
+### 4.3. Polimorfismo por Subtipagem com Protocols
+
+Defina um protocolo `Pagavel` com um método `realizar_pagamento()`. Crie as classes `CartaoDeCredito` e `PayPal`, que implementam o protocolo de maneiras diferentes para processar pagamentos.
+
+1. Defina um protocolo `Pagavel`  que tenha o método `realizar_pagamento()`.
+2. A classe `CartaoDeCredito` deve implementar `realizar_pagamento()` para processar um pagamento via cartão.
+3. A classe `PayPal` deve implementar `realizar_pagamento()` para processar um pagamento via PayPal.
+4. Crie uma função que receba qualquer tipo de método de pagamento e chame `realizar_pagamento()`.
