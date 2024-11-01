@@ -77,10 +77,13 @@ class GameManager:
             Ground(300, self.height - 90, 50, 50)
         ]
 
-        self.clock = pygame.time.Clock()
-        self.is_running = True
+        self.clock = None
+        self.is_running = False
 
     def run(self):
+        # Inicializa o jogo
+        self.clock = pygame.time.Clock()
+        self.is_running = True
         while self.is_running:            
             self.event()
             self.update()
