@@ -1,0 +1,94 @@
+{
+    "screen": {
+        "width": 800,
+        "height": 600,
+        "fps": 60
+    },
+    "difficulty": {
+        "easy": {
+            "lives": 5,
+            "paddle_vel_x": 4,
+            "ball_vel_x": 2,
+            "ball_vel_y": 2
+        },
+        "medium": {
+            "lives": 3,
+            "paddle_vel_x": 5,
+            "ball_vel_x": 3,
+            "ball_vel_y": 3
+        },
+        "hard": {
+            "lives": 2,
+            "paddle_vel_x": 6,
+            "ball_vel_x": 4,
+            "ball_vel_y": 4
+        }
+    },
+    "levels": [
+        {
+            "layout": [
+                {"type": "brick_blue", "x": 50, "y": 50},
+                {"type": "brick_blue", "x": 150, "y": 50},
+                {"type": "brick_blue", "x": 250, "y": 50},
+                {"type": "brick_blue", "x": 350, "y": 50},
+                {"type": "brick_blue", "x": 450, "y": 50},
+                {"type": "brick_blue", "x": 550, "y": 50},
+                {"type": "brick_blue", "x": 650, "y": 50},
+                {"type": "brick_green", "x": 50, "y": 100},
+                {"type": "brick_green", "x": 150, "y": 100},
+                {"type": "brick_green", "x": 250, "y": 100},
+                {"type": "brick_green", "x": 350, "y": 100},
+                {"type": "brick_green", "x": 450, "y": 100},
+                {"type": "brick_green", "x": 550, "y": 100},
+                {"type": "brick_green", "x": 650, "y": 100},
+                {"type": "brick_purple", "x": 50, "y": 150},
+                {"type": "brick_purple", "x": 150, "y": 150},
+                {"type": "brick_purple", "x": 250, "y": 150},
+                {"type": "brick_purple", "x": 350, "y": 150},
+                {"type": "brick_purple", "x": 450, "y": 150},
+                {"type": "brick_purple", "x": 550, "y": 150},
+                {"type": "brick_purple", "x": 650, "y": 150}
+            ]
+        }
+    ],
+    "objects": {
+        "paddle": {
+            "width": 100,
+            "height": 20,
+            "images": [
+                "../assets/sprite/paddle/50-Breakout-Tiles.png",
+                "../assets/sprite/paddle/51-Breakout-Tiles.png",
+                "../assets/sprite/paddle/52-Breakout-Tiles.png"
+            ],
+            "frames_per_image": 10
+        },
+        "ball": {
+            "radius": 10,
+            "image": "../assets/sprite/ball/58-Breakout-Tiles.png"
+        },
+        "brick_blue": {
+            "width": 50,
+            "height": 20,
+            "image_map": {
+                "normal": "../assets/sprite/brick/01-Breakout-Tiles.png",
+                "cracked": "../assets/sprite/brick/02-Breakout-Tiles.png"
+            }
+        },
+        "brick_green": {
+            "width": 50,
+            "height": 20,
+            "image_map": {
+                "normal": "../assets/sprite/brick/03-Breakout-Tiles.png",
+                "cracked": "../assets/sprite/brick/04-Breakout-Tiles.png"
+            }
+        },
+        "brick_purple": {
+            "width": 50,
+            "height": 20,
+            "image_map": {
+                "normal": "../assets/sprite/brick/05-Breakout-Tiles.png",
+                "cracked": "../assets/sprite/brick/06-Breakout-Tiles.png"
+            }
+        }
+    }
+}
