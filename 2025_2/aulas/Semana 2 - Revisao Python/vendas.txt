@@ -1,0 +1,101 @@
+Alimentos e Bebidas,10
+Vestuário e Acessórios,200
+Eletroeletrônicos,500
+Móveis e Decoração,1000
+Vestuário e Acessórios,75
+Produtos de Higiene e Limpeza,5
+Alimentos e Bebidas,45
+Eletroeletrônicos,320
+Móveis e Decoração,880
+Produtos de Higiene e Limpeza,25
+Vestuário e Acessórios,150
+Alimentos e Bebidas,90
+Eletroeletrônicos,710
+Móveis e Decoração,450
+Produtos de Higiene e Limpeza,60
+Vestuário e Acessórios,35
+Alimentos e Bebidas,240
+Eletroeletrônicos,920
+Móveis e Decoração,120
+Produtos de Higiene e Limpeza,80
+Vestuário e Acessórios,55
+Alimentos e Bebidas,15
+Eletroeletrônicos,300
+Móveis e Decoração,990
+Produtos de Higiene e Limpeza,10
+Vestuário e Acessórios,95
+Alimentos e Bebidas,400
+Eletroeletrônicos,110
+Móveis e Decoração,200
+Produtos de Higiene e Limpeza,65
+Vestuário e Acessórios,250
+Alimentos e Bebidas,310
+Eletroeletrônicos,75
+Móveis e Decoração,660
+Produtos de Higiene e Limpeza,95
+Vestuário e Acessórios,470
+Alimentos e Bebidas,55
+Eletroeletrônicos,800
+Móveis e Decoração,215
+Produtos de Higiene e Limpeza,35
+Vestuário e Acessórios,500
+Alimentos e Bebidas,275
+Eletroeletrônicos,185
+Móveis e Decoração,345
+Produtos de Higiene e Limpeza,20
+Vestuário e Acessórios,600
+Alimentos e Bebidas,140
+Eletroeletrônicos,920
+Móveis e Decoração,725
+Produtos de Higiene e Limpeza,90
+Vestuário e Acessórios,325
+Alimentos e Bebidas,65
+Eletroeletrônicos,450
+Móveis e Decoração,130
+Produtos de Higiene e Limpeza,70
+Vestuário e Acessórios,40
+Alimentos e Bebidas,335
+Eletroeletrônicos,675
+Móveis e Decoração,85
+Produtos de Higiene e Limpeza,15
+Vestuário e Acessórios,195
+Alimentos e Bebidas,420
+Eletroeletrônicos,210
+Móveis e Decoração,530
+Produtos de Higiene e Limpeza,55
+Vestuário e Acessórios,275
+Alimentos e Bebidas,380
+Eletroeletrônicos,305
+Móveis e Decoração,490
+Produtos de Higiene e Limpeza,40
+Vestuário e Acessórios,710
+Alimentos e Bebidas,125
+Eletroeletrônicos,250
+Móveis e Decoração,880
+Produtos de Higiene e Limpeza,85
+Vestuário e Acessórios,315
+Alimentos e Bebidas,95
+Eletroeletrônicos,405
+Móveis e Decoração,770
+Produtos de Higiene e Limpeza,75
+Vestuário e Acessórios,210
+Alimentos e Bebidas,445
+Eletroeletrônicos,540
+Móveis e Decoração,295
+Produtos de Higiene e Limpeza,50
+Vestuário e Acessórios,125
+Alimentos e Bebidas,225
+Eletroeletrônicos,805
+Móveis e Decoração,650
+Produtos de Higiene e Limpeza,30
+Vestuário e Acessórios,420
+Alimentos e Bebidas,305
+Eletroeletrônicos,915
+Móveis e Decoração,180
+Produtos de Higiene e Limpeza,65
+Vestuário e Acessórios,345
+Alimentos e Bebidas,205
+Eletroeletrônicos,600
+Móveis e Decoração,725
+Produtos de Higiene e Limpeza,45
+Vestuário e Acessórios,285
