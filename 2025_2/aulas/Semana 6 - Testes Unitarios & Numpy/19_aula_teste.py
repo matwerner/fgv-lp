@@ -1,6 +1,14 @@
 import unittest
 
-from aula16_logica import unir_lista
+# Evitar: Apenas utilizando por uma questão de organização do código
+# 
+# Normalmente faríamos:
+# from mymodule import unir_lista
+#
+# Porém, nomes de módulos que começam com números (ex.: "19_aula_logica")
+# não podem ser importados diretamente.  
+# Para contornar, usamos __import__
+mymodule = __import__("19_aula_logica")
 
 
 class TesteUnirLista(unittest.TestCase):
@@ -11,7 +19,7 @@ class TesteUnirLista(unittest.TestCase):
         seq2 = [2, 4, 6, 8]
 
         # Saida
-        real = unir_lista(seq1, seq2)
+        real = mymodule.unir_lista(seq1, seq2)
 
         # Comparacao
         esperado = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -21,7 +29,7 @@ class TesteUnirLista(unittest.TestCase):
         seq1 = [1, 3, 5, 7]
         seq2 = [2, 4, 6, 8, 9, 10, 11]
 
-        real = unir_lista(seq1, seq2)
+        real = mymodule.unir_lista(seq1, seq2)
 
         esperado = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
         self.assertListEqual(real, esperado)
@@ -30,7 +38,7 @@ class TesteUnirLista(unittest.TestCase):
         seq1 = [2, 4, 6, 8, 9, 10, 11]
         seq2 = [1, 3, 5, 7]
 
-        real = unir_lista(seq1, seq2)
+        real = mymodule.unir_lista(seq1, seq2)
 
         esperado = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
         self.assertListEqual(real, esperado)
@@ -40,7 +48,7 @@ class TesteUnirLista(unittest.TestCase):
         seq2 = [2, 4, 6, 8]
 
         with self.assertRaises(ValueError):
-            unir_lista(seq1, seq2)
+            mymodule.unir_lista(seq1, seq2)
 
 
 if __name__ == "__main__":
