@@ -108,12 +108,160 @@ print(conta.get_saldo())  # Saída: 1000
 
 * Aqui, usamos `get_saldo()` para acessar o saldo e `set_saldo()` para alterá-lo. O método `set_saldo()` inclui uma validação para garantir que o saldo nunca seja negativo. Isso é fundamental para sistemas reais, onde erros de lógica podem resultar em falhas críticas, como permitir que uma conta tenha um saldo negativo em um sistema bancário.
 
-## 4. Funções Especiais Simples
+## 4. Decorador `property`
+
+* O decorador `@property` é uma forma mais **elegante e pythonica** de implementar o encapsulamento, substituindo o uso explícito de métodos `get_` e `set_`.
+* Ele permite que você acesse e modifique atributos **como se fossem públicos**, mas mantendo **controle interno** sobre leitura e escrita.
+* Assim, o código que usa a classe fica mais limpo, sem abrir mão da segurança e da validação dos dados.
+
+### 4.1. O que significa ser "pythonico"
+
+* Dizemos que algo é **"pythonico"** quando segue o **espírito e as boas práticas da linguagem Python** — ou seja, quando o código é **claro, direto e fácil de ler**.
+* A própria filosofia do Python é expressa no famoso “**Zen of Python**” (que pode ser exibido no terminal digitando `import this`), cujos princípios incluem:
+
+  * *Beautiful is better than ugly* (Bonito é melhor que feio)
+  * *Simple is better than complex* (Simples é melhor que complexo)
+  * *Readability counts* (Legibilidade importa)
+* Um código pythonico prioriza a **clareza** e a **intenção**: deve ser óbvio o que o código faz apenas lendo-o, sem precisar entender detalhes técnicos desnecessários.
+
+#### Exemplo comparativo
+
+* Um código **não pythonico** pode funcionar, mas ser mais verboso e artificial:
+
+    ```python
+    conta.set_saldo(conta.get_saldo() + 100)
+    ```
+
+* Já um código **pythonico** busca ser natural, expressando a intenção de forma simples:
+
+    ```python
+    conta.saldo += 100
+    ```
+
+* Ambos fazem a mesma coisa, mas o segundo é mais **fluido e expressivo**, pois se comporta como uma linguagem natural, mantendo ao mesmo tempo o encapsulamento interno do atributo.
+
+#### Em resumo
+
+Ser pythonico significa **usar os recursos da linguagem de forma idiomática**, explorando seus mecanismos nativos (como `@property`, *list comprehensions*, *context managers*, etc.) para escrever código que seja:
+
+* **Claro e legível**
+* **Natural de ler e escrever**
+* **Coerente com o estilo da linguagem**
+* **Difícil de usar errado**
+
+### 4.2. A motivação
+
+* Quando usamos `getters` e `setters` tradicionais, o código pode ficar verboso e menos natural:
+
+    ```python
+    conta = ContaBancaria("João", 1000)
+    print(conta.get_saldo())  # acesso indireto
+    conta.set_saldo(2000)
+    ```
+
+* Com o `@property`, podemos escrever de forma mais fluida e intuitiva, como se estivéssemos acessando diretamente o atributo:
+
+    ```python
+    print(conta.saldo)   # acesso direto, mas ainda controlado
+    conta.saldo = 2000   # alteração direta, mas com validação
+    ```
+
+### 4.3. Exemplo prático
+
+* Vamos reescrever o exemplo anterior da conta bancária usando `@property`:
+
+    ```python
+    class ContaBancaria:
+        def __init__(self, titular, saldo):
+            self.titular = titular
+            self._saldo = saldo
+
+        @property
+        def saldo(self):
+            return self._saldo
+
+        @saldo.setter
+        def saldo(self, valor):
+            if valor >= 0:
+                self._saldo = valor
+            else:
+                print("Saldo inválido")
+
+    # Testando
+    conta = ContaBancaria("João", 1000)
+    print(conta.saldo)   # Saída: 1000
+
+    conta.saldo = -200   # Saída: Saldo inválido
+    print(conta.saldo)   # Saída: 1000
+    ```
+
+* No exemplo acima:
+
+  * `@property` transforma o método `saldo()` em um **atributo somente leitura**.
+  * `@saldo.setter` permite que esse mesmo nome (`saldo`) tenha um **comportamento controlado de escrita**.
+  * O atributo `_saldo` continua sendo protegido internamente, mas acessado externamente de forma natural.
+
+### 4.4. Benefícios do uso do `@property`
+
+* **Código mais limpo**: elimina a necessidade de chamar métodos `get_` e `set_`.
+* **Maior legibilidade**: quem usa a classe pode tratar os atributos como se fossem públicos.
+* **Encapsulamento preservado**: a lógica interna continua protegida e pode incluir validações ou cálculos.
+* **Compatibilidade futura**: você pode começar com um atributo simples e, se precisar, converter em `@property` sem quebrar o código que o utiliza.
+
+### 4.5. Exemplo com validação e lógica adicional
+
+* Além de simples validações, podemos usar o `@property` para **calcular valores dinamicamente** com base em outros atributos:
+
+    ```python
+    class Produto:
+        def __init__(self, nome, preco, desconto):
+            self.nome = nome
+            self._preco = preco
+            self.desconto = desconto
+
+        @property
+        def preco_final(self):
+            return self._preco * (1 - self.desconto / 100)
+
+    # Teste
+    p = Produto("Notebook", 5000, 10)
+    print(p.preco_final)  # Saída: 4500.0
+    ```
+
+* Nesse caso, o atributo `preco_final` não existe de fato armazenado no objeto — ele é **calculado sob demanda** toda vez que é acessado, garantindo consistência entre os dados.
+
+### 4.6. Leitura e escrita separadas
+
+* Você também pode definir apenas o **getter** (sem `@setter`) se quiser criar um **atributo somente leitura**:
+
+    ```python
+    class Aluno:
+        def __init__(self, nome, notas):
+            self.nome = nome
+            self._notas = notas
+
+        @property
+        def media(self):
+            return sum(self._notas) / len(self._notas)
+
+    # Teste
+    a = Aluno("Ana", [8, 9, 7])
+    print(a.media)   # Saída: 8.0
+    a.media = 10     # Erro: não existe setter definido
+    ```
+
+* Isso é útil para propriedades que devem ser calculadas ou derivadas, e não alteradas diretamente.
+
+<!-- Com o `@property`, o Python oferece uma forma simples e poderosa de aplicar encapsulamento sem abrir mão da clareza do código.
+Essa técnica é amplamente usada em sistemas reais e bibliotecas profissionais, pois combina **segurança, legibilidade e flexibilidade** de maneira elegante. -->
+
+
+## 5. Funções Especiais Simples
 
 * Algumas funções especiais permitem personalizar o comportamento de objetos em situações comuns, como exibir e comparar objetos.
 * Essas funções são especialmente úteis quando criamos classes que precisam ser usadas em interações mais complexas no sistema.
 
-### 4.1. `__str__`: Representação de Objetos
+### 5.1. `__str__`: Representação de Objetos
 
 * O método __str__ define como um objeto será representado como uma string, útil quando queremos exibir um objeto de forma legível.
 
@@ -136,7 +284,7 @@ print(p1)  # Saída: Pessoa: Ana, Idade: 25
 
 * Isso facilita a leitura e interpretação dos dados quando imprimimos uma instância da classe.
 
-### 4.2. `__eq__`: Comparação de Objetos
+### 5.2. `__eq__`: Comparação de Objetos
 
 O método `__eq__` permite comparar se dois objetos são iguais com base em seus atributos.
 
@@ -160,7 +308,7 @@ print(p1 == p2)  # Saída: False
 
 * Essa função é útil em situações onde precisamos verificar se dois objetos representam a mesma entidade no sistema, como verificar se dois registros no banco de dados são iguais.
 
-## 5. Práticas Recomendadas de Encapsulamento
+## 6. Práticas Recomendadas de Encapsulamento
 
 * **Evitar Expor Atributos Diretamente**:
 Proteja os dados importantes da classe usando `_` ou `__`, e forneça métodos de acesso (getters e setters) para garantir que os dados sejam tratados de forma segura e controlada.
@@ -172,15 +320,15 @@ Isso evita que o estado interno da classe se torne inconsistente.
 * **Facilitar a Manutenção do Código**:
 O encapsulamento permite que o comportamento interno de uma classe seja alterado sem modificar o código que utiliza essa classe, facilitando a manutenção e evolução do sistema.
 
-## 6. Exercícios Práticos
+## 7. Exercícios Práticos
 
-### 6.1. Conta bancária
+### 7.1. Conta bancária
 
 1. Crie uma classe simples que represente uma conta bancária com atributos como `titular` e `saldo`, garantindo que o `saldo` só possa ser acessado e modificado por meio de getters e setters.
 2. Faça com que implementem o método `__str__` para retornar uma string amigável que descreva o objeto.
 3. Peça para implementar o método `__eq__` em uma classe para comparar objetos e verificar se são iguais.
 
-### 6.2. Match 3
+### 7.2. Match 3
 
 
 1. Crie uma classe chamada `Peca` que represente uma peça do jogo com atributos como `tipo` e `cor`.
