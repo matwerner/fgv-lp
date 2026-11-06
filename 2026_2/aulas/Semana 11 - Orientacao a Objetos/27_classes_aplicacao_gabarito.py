@@ -107,15 +107,16 @@ class LancamentoOrdenacao(Ordenacao):
 # ---------- Busca e exibição ----------
 
 class Buscador:
+    """Guarda o catálogo de jogos. Filtros e ordenação chegam a cada busca."""
 
-    def __init__(self, filtros, ordenacao):
-        self.filtros = filtros
-        self.ordenacao = ordenacao
+    def __init__(self, jogos):
+        self.jogos = jogos
 
-    def buscar(self, jogos):
-        for filtro in self.filtros:
-            jogos = filtro.filtrar(jogos)
-        return self.ordenacao.ordenar(jogos)
+    def buscar(self, filtros, ordenacao):
+        resultado = self.jogos
+        for filtro in filtros:
+            resultado = filtro.filtrar(resultado)
+        return ordenacao.ordenar(resultado)
 
 
 class Exibidor:
@@ -124,6 +125,8 @@ class Exibidor:
         self.limite = limite
 
     def exibir(self, jogos):
+        if not jogos:
+            print("Nenhum jogo encontrado.")
         for posicao, jogo in enumerate(jogos[:self.limite], start=1):
             print(f"#{posicao}: {self.formatar(jogo)}")
 
@@ -132,20 +135,50 @@ class Exibidor:
                 f"{jogo.num_avaliacoes} avaliações | R$ {jogo.preco:.2f}")
 
 
+# ---------- Linha de comando ----------
+
+def perguntar_filtros():
+    filtros = []
+
+    tags = input("Tags (separadas por vírgula, vazio para ignorar): ").strip()
+    if tags:
+        filtros.append(TagsFiltro([t.strip() for t in tags.split(",")]))
+
+    nota = input("Nota mínima (vazio para ignorar): ").strip()
+    if nota:
+        avaliacoes = input("Mínimo de avaliações (vazio = 0): ").strip()
+        filtros.append(NotaMinimaFiltro(float(nota), int(avaliacoes or 0)))
+
+    preco = input("Preço máximo (vazio para ignorar): ").strip()
+    if preco:
+        filtros.append(PrecoMaximoFiltro(float(preco)))
+
+    return filtros
+
+
+def perguntar_ordenacao():
+    print("Ordenar por: 1) melhor nota  2) menor preço  3) lançamento mais recente")
+    opcao = input("Opção (padrão 1): ").strip() or "1"
+    if opcao == "2":
+        return PrecoOrdenacao()
+    if opcao == "3":
+        return LancamentoOrdenacao(decrescente=True)
+    return NotaOrdenacao(decrescente=True)
+
+
 def main():
     jogos = [parse_jogo(d) for d in carregar_jogos("games.jsonl")]
+    buscador = Buscador(jogos)
+    exibidor = Exibidor(limite=10)
 
-    buscador = Buscador(
-        filtros=[
-            TagsFiltro(["RPG"]),
-            NotaMinimaFiltro(80, 1000),
-            PrecoMaximoFiltro(100),
-        ],
-        ordenacao=NotaOrdenacao(decrescente=True),
-    )
+    print(f"{len(jogos)} jogos carregados.")
+    while True:
+        filtros = perguntar_filtros()
+        ordenacao = perguntar_ordenacao()
+        exibidor.exibir(buscador.buscar(filtros, ordenacao))
 
-    resultado = buscador.buscar(jogos)
-    Exibidor(limite=10).exibir(resultado)
+        if input("\nNova busca? (s/n): ").strip().lower() != "s":
+            break
 
 
 if __name__ == "__main__":
